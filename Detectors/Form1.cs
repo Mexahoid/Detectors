@@ -45,7 +45,7 @@ namespace Detectors
 
             _data.Add(new List<double>
             {
-                i1, n, z0, R0, -1, -1, md[0], md[1], 0
+                i1, n, z0, R0, -1, -1, md[0], md[1], md[2]
             });
             for (int j = 0; j < CtrlDGV.ColumnCount; j++)
             {
@@ -78,7 +78,7 @@ namespace Detectors
             
             _data.Add(new List<double>
             {
-                i1, n, z0, R0, L, l, md[0], md[1], 0
+                i1, n, z0, R0, L, l, md[0], md[1], md[2]
             });
             for (int j = 0; j < CtrlDGV.ColumnCount; j++)
             {

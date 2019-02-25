@@ -23,7 +23,7 @@ namespace Detectors
 
         public double[] GetMathAndDisp(double[] dargs, int[] iargs)
         {
-            double[] ans = new double[2];
+            double[] ans = new double[3];
 
             double D = 0, M = 0;
             double zi = dargs[0];
@@ -53,6 +53,7 @@ namespace Detectors
 
             ans[0] = M;
             ans[1] = D;
+            ans[2] = CalculateXi(values);
 
             return ans;
         }
@@ -105,7 +106,7 @@ namespace Detectors
             {
                 zi = NewZ(zi);
                 Ri = NewR(Ri, zi);
-                z_ = NewZ(z0);
+                z_ = NewZ(z_);
                 R_ = NewR(R_, z_);
                 i++;
             }
@@ -116,6 +117,30 @@ namespace Detectors
             ans[1] = l;
 
             return ans;
+        }
+
+        public int[] Frequency(List<double> items)
+
+        {
+            int[] v = new int[10];
+            foreach (double t in items)
+            {
+                int vi = (int)(t * 10);
+                v[vi]++;
+            }
+            return v;
+
+        }
+
+        public double CalculateXi(List<double> items)
+        {
+            int[] v = Frequency(items);
+            double Xi = 0;
+            for (int i = 1; i < v.Length; i++)
+            {
+                Xi += (((int)v[i - 1] - items.Count / 10) * ((int)v[i - 1] - items.Count / 10)) / (items.Count / 10);
+            }
+            return Xi;
         }
 
         private double NewZ(double oldZ)
